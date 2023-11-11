@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #json-container {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      overflow: auto;
+      max-height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JSON Viewer</h1>
+  <div id="json-container"></div>
+
+  <script>
+    // Function to fetch and display JSON files
+    async function displayJSONFiles() {
+      const response = await fetch('./'); // Assuming JSON files are in the same folder
+      const files = await response.json();
+
+      const jsonContainer = document.getElementById('json-container');
+
+      files.forEach((file, index) => {
+        const link = document.createElement('a');
+        link.href = file;
+        link.textContent = `JSON File ${index + 1}`;
+        link.target = '_blank'; // Open link in a new tab/window
+
+        const breakElement = document.createElement('br');
+
+        jsonContainer.appendChild(link);
+        jsonContainer.appendChild(breakElement);
+      });
+    }
+
+    // Call the function when the page is loaded
+    window.onload = displayJSONFiles;
+  </script>
+</body>
+</html>
+
